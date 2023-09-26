@@ -4,7 +4,7 @@ public class Change_money {
 
 	public static void main(String[] args) {
 		int [] unit = {50000, 10000, 5000, 1000, 500, 100, 50, 10, 1}; // 돈 단위 입력
-		String [] nmaes = {"50000", "10000", "5000", "1000", "500", "100", "50", "10", "1"}; //돈 단위를 array 이름으로 지정
+		String [] names = {"50000", "10000", "5000", "1000", "500", "100", "50", "10", "1"}; //돈 단위를 array 이름으로 지정
 		
 		Scanner stdin = new Scanner(System.in);
 		System.out.print("input price(won): "); //가격 입력
