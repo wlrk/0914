@@ -1,72 +1,54 @@
 import java.util.Scanner;
 
-class Contact {
-    private String name;
-    private String phoneNumber;
-
-    public Contact(String name, String phoneNumber) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-}
-
 public class PhoneBook {
     public static void main(String[] args) {
+        System.out.print("Number of Person>> ");  //입력받을 사람 수 입력
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Number of Person>> ");
+        
         int numberOfPeople = scanner.nextInt();
-        scanner.nextLine(); // 개행 문자 처리
+        
+        scanner.nextLine(); 
 
         Contact[] contacts = new Contact[numberOfPeople];
 
         for (int i = 0; i < numberOfPeople; i++) {
-            System.out.println("Name and Phonesumber (ex. 홍길동 010-1234-5678) >> ");
+            System.out.print("Name and Phonenumber (ex. 홍길동 010-1234-5678) >> ");
             String input = scanner.nextLine();
-            if (input.equalsIgnoreCase("Stop")) {
-                break;
-            }
-            String[] parts = input.split(" ");
-            if (parts.length >= 2) {
+            String[] parts = input.split(" "); //이름과 전화번호를 공백으로 구분하여 입력 받음
+            
+            if (parts.length == 2) {
                 String name = parts[0];
                 String phoneNumber = parts[1];
                 contacts[i] = new Contact(name, phoneNumber);
-            } else {
-                System.out.println("잘못된 입력 형식입니다. 이름과 전화번호를 공백으로 구분해 입력하세요.");
-                i--; // 유효하지 않은 입력을 처리하고 다시 입력하도록 합니다.
+            } //공백으로 정확하게 구분되었을 때 첫번째는 이름, 두번째는 전화번호를 저장
+            else {
+                System.out.println("error");
+                i--; // 정확하지 않은 입력을 받을 땐 다시 수행
             }
         }
+         
+        System.out.println("Store Done");
 
-        if (contacts[0] != null) {
-            System.out.print("Name to search ");
-            String searchName = scanner.nextLine();
+        while (true) {
+            System.out.print("Name to search >> ");
+            String searchName = scanner.nextLine();  //검색 단어를 searchName으로 저장
 
-            while (!searchName.equalsIgnoreCase("Stop")) {
+            if (searchName.equals("Stop")) {
+                break;
+            } //Stop 입력시 종료
+            else {
                 boolean found = false;
-                for (Contact contact : contacts) {
-                    if (contact != null && contact.getName().equals(searchName)) {
-                        System.out.println(contact.getName() + "'s number is " + contact.getPhoneNumber());
+                for (Contact contact : contacts) { //contacts 배열에 저장된 모든 연락처를 순서대로 contact 변수에 할당
+                    if (contact.getName().equals(searchName)) {  //찾고자 하는 이름 (searchName)이 contact.getName()과 같을 때
+                        System.out.println(contact.getName() + "'s number is " + contact.getPhoneNumber()); //번호 출력
                         found = true;
-                        break;
+                        break; //연락처 찾으면 루프 종료
                     }
                 }
-
-                if (!found) {
-                    //System.out.println(contact.getName() + " not found");
+                if (found==false) { //찾고자 하는 연락처 없을 때
+                    System.out.println(searchName + " not found");
                 }
-
-                System.out.print("Name and Phonesumber (ex. 홍길동 010-1234-5678) >> ");
-                searchName = scanner.nextLine();
             }
-        } else {
-            //System.out.println(contact.getName() + " not found");
         }
     }
 }
