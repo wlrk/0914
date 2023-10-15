@@ -33,7 +33,7 @@ public class PhoneBook {
             System.out.print("Name to search >> ");
             String searchName = scanner.nextLine();  //검색 단어를 searchName으로 저장
 
-            if (searchName.equals("Stop")) {
+            if (searchName.equalsIgnoreCase("Stop")) {
                 break;
             } //Stop 입력시 종료
             else {
